@@ -12,7 +12,10 @@ jobs:
           - x86_64-apple-darwin
           - x86_64-unknown-linux-gnu
           - x86_64-pc-windows-msvc
+          - aarch64-unknown-linux-gnu
         include:
+          - target: x86_64-unknown-linux-gnu
+            os: ubuntu-latest
           - target: x86_64-unknown-linux-gnu
             os: ubuntu-latest
           - target: x86_64-apple-darwin
@@ -57,12 +60,12 @@ jobs:
             $CARGO_HOME/registry/cache/
             $CARGO_HOME/git/db/
             target
-          key: ${{ runner.os }}-cargo-${{ steps.toolchain.outputs.rustc_hash}}-${{ hashFiles('**/Cargo.lock') }}
+          key: ${{ runner.os }}-${{matrix.target}}-cargo-${{ steps.toolchain.outputs.rustc_hash}}-${{ hashFiles('**/Cargo.lock') }}
 
       - uses: actions/cache@v3
         with:
           path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock')}}-${{ hashFiles('**/.tool-versions') }}
+          key: ${{ runner.os }}-${{matrix.target}}-gems-${{ hashFiles('**/Gemfile.lock')}}-${{ hashFiles('**/.tool-versions') }}
 
       - name: Prepare ruby gems
         run: |
@@ -100,7 +103,7 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
-          name: rusty_json_schema-${{ matrix.os }}
+          name: rusty_json_schema-${{matrix.target}}
           path: ext/*.default
 
   build:
@@ -117,9 +120,10 @@ jobs:
 
       - name: Unpack prebuild libraries
         run: |
-          mv rusty_json_schema-macos-latest/*.default ext/
-          mv rusty_json_schema-ubuntu-latest/*.default ext/
-          mv rusty_json_schema-windows-latest/*.default ext/
+          mv rusty_json_schema-x86_64-apple-darwin/*.default ext/
+          mv rusty_json_schema-x86_64-unknown-linux-gnu/*.default ext/
+          mv rusty_json_schema-x86_64-pc-windows-msvc/*.default ext/
+          mv rusty_json_schema-aarch64-unknown-linux-gnu/*.default ext/
 
       - name: Build gem
         run: gem build *.gemspec

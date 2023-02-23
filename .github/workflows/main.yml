@@ -1,6 +1,6 @@
 name: Ruby
 
-on: [push]
+on: push
 
 jobs:
   # borrowed from https://github.com/bytecodealliance/cargo-wasi/
@@ -139,8 +139,7 @@ jobs:
     strategy:
       matrix:
         os:
-          - ubuntu-18.04
-          - ubuntu-20.04
+          - ubuntu-latest
           - windows-latest
           - macos-latest
         ruby:

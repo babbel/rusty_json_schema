@@ -5,10 +5,10 @@ require_relative "lib/rusty_json_schema/version"
 Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.name        = "rusty_json_schema"
   spec.version     = RustyJSONSchema::VERSION
-  spec.authors     = ["Leszek Zalewski"]
+  spec.authors     = ["Leszek Zalewski", "Babbel GmbH"]
   spec.email       = ["leszekzalewski@fastmail.fm"]
   spec.license     = "MIT"
-  spec.homepage    = "https://github.com/driv3r/rusty_json_schema"
+  spec.homepage    = "https://github.com/babbel/rusty_json_schema"
   spec.summary     = "FFI wrapper around jsonschema-rs Rust library."
   spec.description = <<-STR
     FFI wrapper around https://github.com/Stranger6667/jsonschema-rs Rust library.
@@ -18,11 +18,12 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
 
   spec.required_ruby_version = Gem::Requirement.new(">= 2.6.0")
 
-  spec.metadata["allowed_push_host"]     = "https://rubygems.org"
+  spec.metadata["allowed_push_host"]     = "https://rubygems.pkg.github.com/babbel"
   spec.metadata["homepage_uri"]          = spec.homepage
   spec.metadata["source_code_uri"]       = spec.homepage
-  spec.metadata["changelog_uri"]         = "https://github.com/driv3r/rusty_json_schema/blob/main/CHANGELOG.md"
+  spec.metadata["changelog_uri"]         = "https://github.com/babbel/rusty_json_schema/blob/main/CHANGELOG.md"
   spec.metadata["rubygems_mfa_required"] = "true"
+  spec.metadata["github_repo"]           = "ssh://github.com/babbel/rusty_json_schema"
 
   spec.files = Dir[
     "lib/**/*",

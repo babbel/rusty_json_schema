@@ -165,3 +165,22 @@ jobs:
 
       - name: Test
         run: ./bin/integration
+
+  wait-before-release:
+    needs: [integration_test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for status checks
+        run: echo "Build matrix complete"
+
+  release:
+    if: github.ref == 'refs/heads/master'
+    name: Publish to GitHub Packages
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-ruby@v1
+
+      - uses: actions/download-artifact@v2
+      - uses: babbel/publish-gem@v1

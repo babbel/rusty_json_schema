@@ -174,9 +174,9 @@ jobs:
         run: echo "Build matrix complete"
 
   release:
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main'
     name: Publish to GitHub Packages
-    needs: [build]
+    needs: [wait-before-release]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

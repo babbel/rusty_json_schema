@@ -181,6 +181,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-ruby@v1
-
+      
       - uses: actions/download-artifact@v2
+
+      - name: remove old builds
+        run: |
+          rm -rf *.gem
+
       - uses: babbel/publish-gem@v1

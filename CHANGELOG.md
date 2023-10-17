@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.17.0]
+### Added
+- Support for aarch64-apple-darwin 
+- Support for Ruby 3.1 and 3.2
+
 ## [0.16.0]
 ### Changed
 - Added support for linux aarch64

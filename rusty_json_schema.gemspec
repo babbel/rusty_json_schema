@@ -2,7 +2,7 @@
 
 require_relative "lib/rusty_json_schema/version"
 
-Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
+Gem::Specification.new do |spec|
   spec.name        = "rusty_json_schema"
   spec.version     = RustyJSONSchema::VERSION
   spec.authors     = ["Leszek Zalewski", "Babbel GmbH"]

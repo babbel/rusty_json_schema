@@ -11,7 +11,6 @@ jobs:
         target:
           - x86_64-apple-darwin
           - x86_64-unknown-linux-gnu
-          - x86_64-pc-windows-msvc
           - aarch64-unknown-linux-gnu
         include:
           - target: aarch64-unknown-linux-gnu
@@ -20,8 +19,6 @@ jobs:
             os: ubuntu-latest
           - target: x86_64-apple-darwin
             os: macos-latest
-          - target: x86_64-pc-windows-msvc
-            os: windows-latest
 
     runs-on: ${{ matrix.os }}
 
@@ -122,7 +119,6 @@ jobs:
         run: |
           mv rusty_json_schema-x86_64-apple-darwin/*.default ext/
           mv rusty_json_schema-x86_64-unknown-linux-gnu/*.default ext/
-          mv rusty_json_schema-x86_64-pc-windows-msvc/*.default ext/
           mv rusty_json_schema-aarch64-unknown-linux-gnu/*.default ext/
 
       - name: Build gem
@@ -140,7 +136,6 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
-          - windows-latest
           - macos-latest
         ruby:
           - 2.6

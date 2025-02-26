@@ -82,7 +82,7 @@ jobs:
         run: cargo clippy
 
       - name: Rust styling check
-        run: cargpo fmt --all -- --check
+        run: cargo fmt --all -- --check
 
       - name: Ruby styling check
         run: bundle exec rubocop --display-cop-names

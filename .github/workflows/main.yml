@@ -143,9 +143,9 @@ jobs:
           - windows-latest
           - macos-latest
         ruby:
-          - 2.6
-          - 2.7
-          - 3.0
+          - 3.1
+          - 3.2
+          - 3.3
 
     runs-on: ${{ matrix.os }}
 
@@ -181,7 +181,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-ruby@v1
-      
+
       - uses: actions/download-artifact@v2
 
       - name: remove old builds

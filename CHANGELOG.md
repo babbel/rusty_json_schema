@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ## [0.16.0]
+### Removed
+- Support for old versions of Ruby
+
+### Added
+- Support for newer versions of Ruby
+
+## [0.16.0]
 ### Changed
 - Added support for linux aarch64
 

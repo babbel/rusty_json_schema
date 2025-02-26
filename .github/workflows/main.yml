@@ -30,6 +30,8 @@ jobs:
       - uses: ruby/setup-ruby@v1
       - name: Update Rust
         run: rustup update
+      - name: Add matrix target
+        run: rustup target add ${{matrix.target}}
 
       # Target older versions of OSX (as old as we reasonably can) to ensure we
       # can run across a wide variety of systems.

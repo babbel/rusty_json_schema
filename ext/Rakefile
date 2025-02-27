@@ -3,7 +3,7 @@
 require "thermite/tasks"
 require_relative "../lib/tasks/thermite_dir_patch"
 
-project_dir = File.dirname(File.dirname(__FILE__))
+project_dir = File.dirname(__FILE__, 2)
 thermite    = Thermite::Tasks.new(cargo_project_path: project_dir,
                                   ruby_project_path: project_dir,
                                   optional_rust_extension: true)

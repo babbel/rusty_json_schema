@@ -26,16 +26,12 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
-      - name: Set up Rust
-        id: toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-            toolchain: stable
-            override: true
-            target: ${{ matrix.target }}
-            components: rustfmt, clippy
+      - name: Update Rust
+        run: rustup update
+      - name: Add matrix target
+        run: rustup target add ${{matrix.target}}
 
       # Target older versions of OSX (as old as we reasonably can) to ensure we
       # can run across a wide variety of systems.
@@ -62,7 +58,7 @@ jobs:
             target
           key: ${{ runner.os }}-${{matrix.target}}-cargo-${{ steps.toolchain.outputs.rustc_hash}}-${{ hashFiles('**/Cargo.lock') }}
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: vendor/bundle
           key: ${{ runner.os }}-${{matrix.target}}-gems-${{ hashFiles('**/Gemfile.lock')}}-${{ hashFiles('**/.tool-versions') }}
@@ -80,20 +76,13 @@ jobs:
           ls -l ext/
 
       - name: Rust test
-        uses: actions-rs/cargo@v1
-        with:
-          command: test
+        run: cargo test
 
       - name: Clippy
-        uses: actions-rs/cargo@v1
-        with:
-          command: clippy
+        run: cargo clippy
 
       - name: Rust styling check
-        uses: actions-rs/cargo@v1
-        with:
-          command: fmt
-          args: --all -- --check
+        run: cargo fmt --all -- --check
 
       - name: Ruby styling check
         run: bundle exec rubocop --display-cop-names
@@ -101,7 +90,7 @@ jobs:
       - name: Tests
         run: bundle exec rspec
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: rusty_json_schema-${{matrix.target}}
           path: ext/*.default
@@ -112,11 +101,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
 
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4
 
       - name: Unpack prebuild libraries
         run: |
@@ -128,7 +117,7 @@ jobs:
       - name: Build gem
         run: gem build *.gemspec
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: rusty_json_schema.gem
           path: '*.gem'
@@ -143,20 +132,21 @@ jobs:
           - windows-latest
           - macos-latest
         ruby:
-          - 2.6
-          - 2.7
-          - 3.0
+          - 3.1
+          - 3.2
+          - 3.3
+          - 3.4
 
     runs-on: ${{ matrix.os }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
 
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4
         with:
           name: rusty_json_schema.gem
 
@@ -179,10 +169,10 @@ jobs:
     needs: [wait-before-release]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-ruby@v1
-      
-      - uses: actions/download-artifact@v2
+
+      - uses: actions/download-artifact@v4
 
       - name: remove old builds
         run: |

@@ -16,7 +16,7 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
     Currently during heavy development.
   STR
 
-  spec.required_ruby_version = Gem::Requirement.new(">= 2.6.0")
+  spec.required_ruby_version = Gem::Requirement.new(">= 3.1.0")
 
   spec.metadata["allowed_push_host"]     = "https://rubygems.pkg.github.com/babbel"
   spec.metadata["homepage_uri"]          = spec.homepage

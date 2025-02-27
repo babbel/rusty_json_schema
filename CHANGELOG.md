@@ -9,10 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.0]
 ### Removed
-- Support for old versions of Ruby
+- Support for old versions of Ruby (2.6, 2.7, 3.0)
 
 ### Added
-- Support for newer versions of Ruby
+- Support for newer versions of Ruby (3.1 to 3.4)
 
 ## [0.16.0]
 ### Changed

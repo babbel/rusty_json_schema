@@ -1,0 +1,29 @@
+version: 2
+
+updates:
+  - package-ecosystem: bundler
+    versioning-strategy: lockfile-only
+    registries:
+      - github-rubygems
+    directory: '/'
+    labels:
+      - dependency
+      - ruby
+      - automerge
+    schedule:
+      interval: 'daily'
+      time: '10:30'
+      timezone: 'Europe/Berlin'
+    open-pull-requests-limit: 1
+
+  - package-ecosystem: cargo
+    directory: '/'
+    labels:
+      - dependency
+      - ruby
+      - automerge
+    schedule:
+      interval: "daily"
+      time: '10:30'
+      timezone: 'Europe/Berlin'
+    open-pull-requests-limit: 3

@@ -14,16 +14,27 @@ updates:
       interval: 'daily'
       time: '10:30'
       timezone: 'Europe/Berlin'
-    open-pull-requests-limit: 1
+    open-pull-requests-limit: 3
 
   - package-ecosystem: cargo
     directory: '/'
     labels:
       - dependency
-      - ruby
+      - rust
       - automerge
     schedule:
       interval: "daily"
       time: '10:30'
       timezone: 'Europe/Berlin'
+    open-pull-requests-limit: 3
+
+  - package-ecosystem: github-actions
+    directory: '/'
+    labels:
+      - dependency
+      - automerge
+    schedule:
+      interval: 'daily'
+      time: '10:30'
+      timezone: Europe/Berlin
     open-pull-requests-limit: 3

@@ -1,6 +1,6 @@
 extern crate libc;
 
-use jsonschema::JSONSchema;
+use jsonschema::Validator as JsonValidator;
 use serde_json::Value;
 
 use std::ffi::{CStr, CString};
@@ -11,7 +11,7 @@ use std::os::raw::{c_char, c_uint};
  * onto value in order to not have it freed up.
  */
 pub struct Validator {
-    schema: &'static JSONSchema,
+    schema: &'static JsonValidator,
 }
 
 impl Validator {
@@ -20,8 +20,8 @@ impl Validator {
      * we free them up separately in the Drop implementation
      */
     fn new(schema: Value) -> Validator {
-        let boxed_compile: &'static JSONSchema =
-            Box::leak(Box::new(JSONSchema::compile(&schema).unwrap()));
+        let boxed_compile: &'static JsonValidator =
+            Box::leak(Box::new(JsonValidator::compile(&schema).unwrap()));
 
         Validator {
             schema: boxed_compile,
@@ -57,7 +57,7 @@ impl Drop for Validator {
      */
     fn drop(&mut self) {
         unsafe {
-            Box::from_raw(self.schema as *const _ as *mut JSONSchema);
+            Box::from_raw(self.schema as *const _ as *mut JsonValidator);
         }
     }
 }

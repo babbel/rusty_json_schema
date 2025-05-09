@@ -45,7 +45,7 @@ impl Validator {
                 errors.push(format!("path \"{}\": {}", path, error));
             }
         }
-        
+
         errors
     }
 }

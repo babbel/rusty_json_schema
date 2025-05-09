@@ -35,8 +35,8 @@ impl Validator {
     fn validate(&self, event: &Value) -> Vec<String> {
         let mut errors: Vec<String> = vec![];
 
-        if let Err(validation_errors) = self.schema.validate(event) {
-            for error in validation_errors {
+        if let Err(_) = self.schema.validate(event) {
+            for error in self.schema.iter_errors(event) {
                 let path = match format!("{}", error.instance_path).as_str() {
                     "" => "/".to_string(),
                     p => p.to_string(),
@@ -45,7 +45,7 @@ impl Validator {
                 errors.push(format!("path \"{}\": {}", path, error));
             }
         }
-
+        
         errors
     }
 }

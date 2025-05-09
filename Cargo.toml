@@ -10,5 +10,5 @@ crate-type = ["cdylib"]
 
 [dependencies]
 libc = "0.2.170"
-jsonschema = "0.26.0"
+jsonschema = "0.30.0"
 serde_json = "1.0"

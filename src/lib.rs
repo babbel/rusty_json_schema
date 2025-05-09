@@ -21,7 +21,7 @@ impl Validator {
      */
     fn new(schema: Value) -> Validator {
         let boxed_compile: &'static JsonValidator =
-            Box::leak(Box::new(JsonValidator::compile(&schema).unwrap()));
+            Box::leak(Box::new(JsonValidator::new(&schema).unwrap()));
 
         Validator {
             schema: boxed_compile,
@@ -57,7 +57,7 @@ impl Drop for Validator {
      */
     fn drop(&mut self) {
         unsafe {
-            Box::from_raw(self.schema as *const _ as *mut JsonValidator);
+            let _ = Box::from_raw(self.schema as *const _ as *mut JsonValidator);
         }
     }
 }
@@ -116,7 +116,7 @@ pub extern "C" fn validator_free(ptr: *mut Validator) {
     }
 
     unsafe {
-        Box::from_raw(ptr);
+        let _ = Box::from_raw(ptr);
     }
 }
 

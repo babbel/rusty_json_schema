@@ -42,6 +42,6 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.add_runtime_dependency "thermite", "~> 0"
 
   # Uncomment to register a new dependency of your gem
-  spec.add_dependency "ffi", "~> 1.14"
+  spec.add_dependency "ffi", "1.15.0"
   spec.add_dependency "json", ">= 1.0"
 end

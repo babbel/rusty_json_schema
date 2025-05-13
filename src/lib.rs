@@ -1,6 +1,6 @@
 extern crate libc;
 
-use jsonschema::JSONSchema;
+use jsonschema::Validator as JsonValidator;
 use serde_json::Value;
 
 use std::ffi::{CStr, CString};
@@ -11,7 +11,7 @@ use std::os::raw::{c_char, c_uint};
  * onto value in order to not have it freed up.
  */
 pub struct Validator {
-    schema: &'static JSONSchema,
+    schema: &'static JsonValidator,
 }
 
 impl Validator {
@@ -20,8 +20,8 @@ impl Validator {
      * we free them up separately in the Drop implementation
      */
     fn new(schema: Value) -> Validator {
-        let boxed_compile: &'static JSONSchema =
-            Box::leak(Box::new(JSONSchema::compile(&schema).unwrap()));
+        let boxed_compile: &'static JsonValidator =
+            Box::leak(Box::new(JsonValidator::new(&schema).unwrap()));
 
         Validator {
             schema: boxed_compile,
@@ -35,8 +35,8 @@ impl Validator {
     fn validate(&self, event: &Value) -> Vec<String> {
         let mut errors: Vec<String> = vec![];
 
-        if let Err(validation_errors) = self.schema.validate(event) {
-            for error in validation_errors {
+        if let Err(_) = self.schema.validate(event) {
+            for error in self.schema.iter_errors(event) {
                 let path = match format!("{}", error.instance_path).as_str() {
                     "" => "/".to_string(),
                     p => p.to_string(),
@@ -57,7 +57,7 @@ impl Drop for Validator {
      */
     fn drop(&mut self) {
         unsafe {
-            Box::from_raw(self.schema as *const _ as *mut JSONSchema);
+            let _ = Box::from_raw(self.schema as *const _ as *mut JsonValidator);
         }
     }
 }
@@ -116,7 +116,7 @@ pub extern "C" fn validator_free(ptr: *mut Validator) {
     }
 
     unsafe {
-        Box::from_raw(ptr);
+        let _ = Box::from_raw(ptr);
     }
 }
 

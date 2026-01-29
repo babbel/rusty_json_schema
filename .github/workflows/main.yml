@@ -100,10 +100,7 @@ jobs:
 
       - name: Unpack prebuild libraries
         run: |
-          mv rusty_json_schema-x86_64-apple-darwin/*.default ext/
           mv rusty_json_schema-x86_64-unknown-linux-gnu/*.default ext/
-          mv rusty_json_schema-x86_64-pc-windows-msvc/*.default ext/
-          mv rusty_json_schema-aarch64-unknown-linux-gnu/*.default ext/
 
       - name: Build gem
         run: gem build *.gemspec

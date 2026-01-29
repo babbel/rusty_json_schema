@@ -13,7 +13,7 @@ libc = "0.2.170"
 jsonschema = "0.19.0"
 serde_json = "1.0"
 
-[patch.crates-io]
-time = "=0.3.45"
-time-core = "=0.1.7"
-time-macros = "=0.2.25"
+[replace]
+"time:0.3.46" = { version = "0.3.45" }
+"time-core:0.1.8" = { version = "0.1.7" }
+"time-macros:0.2.26" = { version = "0.2.25" }

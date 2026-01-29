@@ -10,5 +10,10 @@ crate-type = ["cdylib"]
 
 [dependencies]
 libc = "0.2.170"
-jsonschema = "0.18.0"
+jsonschema = "0.19.0"
 serde_json = "1.0"
+
+[patch.crates-io]
+time = { path = "vendor/time" }
+time-core = { path = "vendor/time-core" }
+time-macros = { path = "vendor/time-macros" }

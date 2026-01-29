@@ -28,8 +28,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
-      - name: Update Rust
-        run: rustup update
+      - name: Install Rust toolchain
+        run: rustup show
       - name: Add matrix target
         run: rustup target add ${{matrix.target}}
 

@@ -2,6 +2,6 @@
 
 module RustyJSONSchema
 
-  VERSION = "0.1.136"
+  VERSION = "1.0.2"
 
 end

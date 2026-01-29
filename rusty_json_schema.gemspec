@@ -30,6 +30,8 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
     "src/**/*.rs",
     "rusty_json_schema.gemspec",
     "Cargo.toml",
+    "Cargo.lock",
+    "vendor/**/*",
     "LICENSE",
     "README.md",
     "ext/Rakefile",
